@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Snake from './Snake';
+import GameOver from './GameOver';
 import Food from './Food';
 
 const getRandomCoordinates = () => {
@@ -23,7 +24,18 @@ const initialState = {
 
 class App extends Component {
 
-  state = initialState;
+  state = {
+    food: getRandomCoordinates(),
+    speed: 200,
+    direction: 'RIGHT',
+    snakeDots: [
+      [0,0],
+      [4,0]
+    ],
+    status: false,
+    snakeLength: 0,
+    turns: 0
+  };
 
   componentDidMount() {
     setInterval(this.moveSnake, this.state.speed);
@@ -39,8 +51,11 @@ class App extends Component {
   onKeyDown = (e) => {
     e = e || window.event;
     switch (e.keyCode) {
+      case 13:
+        if (this.state.status==false) { this.startGame(); }
+        break;
       case 38:
-        this.setState({direction: 'UP'});
+        if (this.state.status==true) { this.setState({direction: 'UP'}); }
         break;
       case 40:
         this.setState({direction: 'DOWN'});
@@ -123,9 +138,9 @@ class App extends Component {
   }
 
   increaseSpeed() {
-    if (this.state.speed > 30) {
+    if (this.state.speed > 20) {
       this.setState({
-        speed: this.state.speed - 30
+        speed: this.state.speed - 20
       })
     }
   }
@@ -137,16 +152,31 @@ class App extends Component {
   }
 
   onGameOver() {
-    alert(`Game Over. Snake length is ${this.state.snakeDots.length}`);
-    this.setState(initialState)
+    let snakeLength = this.state.snakeDots.length - 2;
+    let turns = this.state.turns + 1;
+    this.setState({
+      food: getRandomCoordinates(),
+      speed: 200,
+      direction: 'RIGHT',
+      snakeDots: [
+        [0,0],
+        [4,0]
+      ],
+      status: false,
+      snakeLength: snakeLength,
+      turns: turns
+    })
   }
 
   render() {
     return (
       <div className="container">
         <div className="game-area">
-          <Snake snakeDots={this.state.snakeDots}/>
-          <Food dot={this.state.food}/>
+          {((this.state.status===false) && (this.state.turns != 0)) ?
+          null : <Snake snakeDots={this.state.snakeDots}/>}
+          {(this.state.turns != 0) ? <GameOver status={this.state.status} snakeLength={this.state.snakeLength}/> : null }
+          {((this.state.status===false) && (this.state.turns != 0)) ?
+          null : <Food dot={this.state.food}/>}
         </div>
         <div className="info-area">
           <div className="info-box">
@@ -154,19 +184,19 @@ class App extends Component {
             <h3 className="game-info">{this.state.snakeDots.length - 2}</h3>
           </div>
           <div className="about-box">
-            <a href="https://github.com/pauljoshi">
+            <a target="blank" href="https://github.com/pauljoshi">
               <img src={process.env.PUBLIC_URL + '/logos/github.png'} className="icon" alt="Github" />
             </a>
-            <a href="https://www.instagram.com/thepauljoshi/">
+            <a target="blank" href="https://www.instagram.com/thepauljoshi/">
               <img src={process.env.PUBLIC_URL + '/logos/instagram.png'} className="icon" alt="Instagram" />
             </a>
-            <a href="https://twitter.com/ThePaulJoshi">
+            <a target="blank" href="https://twitter.com/ThePaulJoshi">
               <img src={process.env.PUBLIC_URL + '/logos/twitter.png'} className="icon" alt="Twitter" />
             </a>
-            <a href="https://www.facebook.com/ThePaulJoshi">
+            <a target="blank" href="https://www.facebook.com/ThePaulJoshi">
               <img src={process.env.PUBLIC_URL + '/logos/facebook.png'} className="icon" alt="Facebook" />
             </a>
-            <a href="https://www.behance.net/pauljoshi">
+            <a target="blank" href="https://www.behance.net/pauljoshi">
               <img src={process.env.PUBLIC_URL + '/logos/behance.png'} className="icon" alt="Behance" />
             </a>
           </div>
