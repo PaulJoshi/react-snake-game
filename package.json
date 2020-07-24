@@ -2,7 +2,7 @@
   "name": "react-snake",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://pauljoshi.github.io/snake-game",
+  "homepage": "https://pauljoshi.github.io/react-snake-game/",
   "dependencies": {
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
