@@ -5,9 +5,117 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #0e153a;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+p {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  text-align: center;
+  color: #22d1ee;
+  margin-top: 1.6rem;
+}
+
+.App-header {
+  background-color: #3d5af1;
+  min-height: 0.1vh;
+  max-height: 12vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0px;
+  text-align: center;
+}
+
+h1 {
+  font-size: calc(20px + 2vmin);
+  color: #0e153a;
+  margin: 10px;
+}
+
+.game-area {
+  flex: none;
+  position: relative;
+  margin: 40px 15px;
+  width: 500px;
+  height: 500px;
+  border: 2px solid #3d5af1;
+}
+
+.snake-dot {
+  position: absolute;
+  width: 4%;
+  height: 4%;
+  background-color: #22d1ee;
+  border: 0px;
+  z-index: 2;
+}
+
+.snake-food {
+  position: absolute;
+  width: 4%;
+  height: 4%;
+  background: #3d5af1;
+  border: 0px;
+  z-index: 1;
+}
+
+.info-area {
+  flex: none;
+  position: relative;
+  margin: 40px 15px;
+  height: 500px;
+}
+
+.info-box {
+  width: 120px;
+  height: 160px;
+  position: relative;
+  border: 2px solid #3d5af1;
+}
+
+.about-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-top: 36px;
+  width: 120px;
+  height: 300px;
+  position: relative;
+  border: 2px solid #3d5af1;
+}
+
+.game-info {
+  margin: 0;
+  position: absolute;
+  text-align: center;
+  top: 27%;
+  right: 20%;
+  bottom: 0%;
+  left: 20%;
+  color: #22d1ee;
+  font-size: 70px;
+  z-index: 1;
+}
+
+.container {
+  display: flex;
+  margin: 0 auto;
+  max-width:700px;
+  padding: 10px;
+}
+
+.icon {
+  height: 30px;
+  width: 30px;
+  transition: ease;
+}
+
+a {
+  text-align: center;
+}
+
+a :hover {
+  filter: brightness(1.5);
 }
