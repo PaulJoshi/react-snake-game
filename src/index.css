@@ -48,8 +48,8 @@ h4 {
   text-align: center;
   position: relative;
   margin: 40px 15px;
-  width: 500px  !important;
-  height: 500px  !important;
+  width: 500px;
+  height: 500px;
   border: 2px solid #3d5af1;
 }
 
@@ -108,6 +108,7 @@ h4 {
 
 .container {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   margin: 0 auto;
   max-width: 700px;
@@ -129,6 +130,10 @@ a :hover {
 }
 
 @media (max-width: 768px) {
+  .game-area {
+    height: 50vh;
+  }
+
   .info-area {
     flex-direction: row;
     height: 100px;

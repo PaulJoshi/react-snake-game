@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Snake from './Snake';
 import GameOver from './GameOver';
 import Food from './Food';
+import { useSwipeable, Swipeable } from 'react-swipeable'
 
 const getRandomCoordinates = () => {
   let min = 1;
@@ -59,6 +60,25 @@ class App extends Component {
         this.startGame();
         break;
     }
+  }
+
+  userSwipedRight = (event) => {
+    this.setState({direction: 'RIGHT'});
+    this.startGame();
+  }
+
+  userSwipedLeft = (event) => {
+    this.setState({direction: 'LEFT'});
+    this.startGame();
+  }
+
+  userSwipedDown = (event) => {
+    this.setState({direction: 'DOWN'});
+    this.startGame();
+  }
+
+  userSwipedUp = (event) => {
+    if (this.state.status==true) { this.setState({direction: 'UP'}); }
   }
 
   moveSnake = () => {
@@ -160,13 +180,17 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-        <div className="game-area">
+        <Swipeable className="game-area" onSwipedRight={this.userSwipedRight} 
+        preventDefaultTouchmoveEvent={true} onSwipedLeft={this.userSwipedLeft} 
+        preventDefaultTouchmoveEvent={true} onSwipedUp={this.userSwipedUp} 
+        preventDefaultTouchmoveEvent={true} onSwipedDown={this.userSwipedDown} 
+        preventDefaultTouchmoveEvent={true}>
           {((this.state.status===false) && (this.state.turns != 0)) ?
           null : <Snake snakeDots={this.state.snakeDots}/>}
           {(this.state.turns != 0) ? <GameOver status={this.state.status} snakeLength={this.state.snakeLength}/> : null }
           {((this.state.status===false) && (this.state.turns != 0)) ?
           null : <Food dot={this.state.food}/>}
-        </div>
+        </Swipeable>
         <div className="info-area">
           <div className="info-box">
             <p>Score</p>
